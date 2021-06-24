@@ -42,6 +42,8 @@ export function Room() {
 
         await database.ref(`rooms/${roomId}/questions`).push(question)
 
+        setNewQuestion('')
+
     }
 
     return (
@@ -67,7 +69,14 @@ export function Room() {
                     />
 
                     <div className="form-footer">
-                        <span>To send a question, <button>sign in</button></span>
+                        {user ? (
+                            <div className="user-info">
+                                <img src={user.avatar} alt={user.name} />
+                                <span>{user.name}</span>
+                            </div>
+                        ) : (
+                            <span>To send a question, <button>sign in</button></span>
+                        )}
                         <Button type="submit">Send question</Button>
                     </div>
                 </form>
